@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -47,7 +48,10 @@ st.markdown("""
 """, unsafe_allow_html=True)
  
 # ── Gemini API ────────────────────────────────────────────
-GEMINI_API_KEY = "AIzaSyDnMcdYu4vWZuZ9BTECpSK4_kYLKz9I5eU"
+try:
+    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+except:
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
  
 def ask_gemini(prompt):
     """Call Gemini 2.5 Flash via REST API"""
