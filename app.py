@@ -49,13 +49,12 @@ st.markdown("""
  
 # ── Gemini API ────────────────────────────────────────────
 try:
-    GEMINI_API_KEY = st.secrets["AIzaSyCdDeDDKZBzcUbYafbfEyFAbmF2_4Z5QHY"]
+    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 except:
-    GEMINI_API_KEY = os.getenv("AIzaSyCdDeDDKZBzcUbYafbfEyFAbmF2_4Z5QHY")
- 
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
 def ask_gemini(prompt):
-    """Call Gemini 2.5 Flash via REST API"""
-    url = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent"
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent"
     try:
         payload = {
             "contents": [{"parts": [{"text": prompt}]}],
@@ -82,7 +81,6 @@ def ask_gemini(prompt):
         return "⚠️ Request timed out. Check your internet connection."
     except Exception as e:
         return f"⚠️ Error: {str(e)}"
- 
 # ── Load Data ─────────────────────────────────────────────
 @st.cache_data
 def load_data():
