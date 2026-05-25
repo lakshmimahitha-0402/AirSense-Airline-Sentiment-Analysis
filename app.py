@@ -49,9 +49,9 @@ st.markdown("""
  
 # ── Gemini API ────────────────────────────────────────────
 try:
-    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+    GEMINI_API_KEY = st.secrets["AIzaSyCdDeDDKZBzcUbYafbfEyFAbmF2_4Z5QHY"]
 except:
-    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+    GEMINI_API_KEY = os.getenv("AIzaSyCdDeDDKZBzcUbYafbfEyFAbmF2_4Z5QHY")
  
 def ask_gemini(prompt):
     """Call Gemini 2.5 Flash via REST API"""
