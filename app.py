@@ -54,7 +54,7 @@ except:
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 def ask_gemini(prompt):
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent"
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
     try:
         payload = {
             "contents": [{"parts": [{"text": prompt}]}],
