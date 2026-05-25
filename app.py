@@ -54,7 +54,7 @@ except:
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 def ask_gemini(prompt):
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
     try:
         payload = {
             "contents": [{"parts": [{"text": prompt}]}],
@@ -360,7 +360,7 @@ elif page == "Airline Deep Dive":
 # ══════════════════════════════════════════════════════════
 elif page == "GenAI Insights":
     st.markdown('<div class="page-title">🤖 GenAI Insights</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-subtitle">Powered by Google Gemini 1.5 Flash — AI-generated analysis of airline sentiment data</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-subtitle">Powered by Google Gemini 2.0 Flash — AI-generated analysis of airline sentiment data</div>', unsafe_allow_html=True)
  
     # Prepare data summary for Gemini
     neg_reasons = df[df['airline_sentiment']=='negative']['negativereason'].value_counts().head(5)
