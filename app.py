@@ -355,7 +355,7 @@ elif page == "Airline Deep Dive":
 # ══════════════════════════════════════════════════════════
 elif page == "GenAI Insights":
     st.markdown('<div class="page-title">🤖 GenAI Insights</div>', unsafe_allow_html=True)
-    st.markdown('<div class="page-subtitle">Powered by Google Gemini 2.0 Flash — AI-generated analysis of airline sentiment data</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-subtitle">Powered by Meta LLaMA 3.1 via Groq — AI-generated analysis of airline sentiment data</div>', unsafe_allow_html=True)
  
     # Prepare data summary for Gemini
     neg_reasons = df[df['airline_sentiment']=='negative']['negativereason'].value_counts().head(5)
@@ -529,4 +529,4 @@ with col1:
 with col2:
     st.caption("Built by [Lakshmi Mahitha Noudu](https://www.linkedin.com/in/lakshmi-mahitha-noudu-490160268)")
 with col3:
-    st.caption("🤖 Powered by Google Gemini 2.5 Flash  |  Version 1.0  |  May 2026")
+    st.caption("🤖 Powered by Meta LLaMA 3.1 (Groq)  |  Version 1.0  |  May 2026")
