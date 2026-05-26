@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -45,45 +46,34 @@ st.markdown("""
     footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
- 
-# ── Gemini API ────────────────────────────────────────────
-import os
-import time
-
+#------------------------------------------------------------------ 
 try:
-    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+    GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 except:
-    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+    GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 def ask_gemini(prompt):
-    """Call Gemini 2.0 Flash Lite via REST API"""
-    time.sleep(2)
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent"
+    url = "https://api.groq.com/openai/v1/chat/completions"
     try:
-        payload = {
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {"temperature": 0.7, "maxOutputTokens": 1024}
+        headers = {
+            "Authorization": f"Bearer {GROQ_API_KEY}",
+            "Content-Type": "application/json"
         }
-        response = requests.post(
-            url,
-            params={"key": GEMINI_API_KEY},
-            json=payload,
-            timeout=30
-        )
+        payload = {
+            "model": "llama3-8b-8192",
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 1024,
+            "temperature": 0.7
+        }
+        response = requests.post(url, headers=headers, json=payload, timeout=30)
         if response.status_code == 200:
-            return response.json()["candidates"][0]["content"]["parts"][0]["text"]
+            return response.json()["choices"][0]["message"]["content"]
         elif response.status_code == 429:
-            err_detail = response.json().get("error", {}).get("message", "Unknown")
-            return f"⚠️ Rate limit reached: {err_detail}"
-        elif response.status_code == 403:
-            return "⚠️ API key invalid. Please check at aistudio.google.com"
-        elif response.status_code == 400:
-            err = response.json().get("error", {}).get("message", "Unknown")
-            return f"⚠️ Bad request: {err}"
+            return "⚠️ Rate limit reached. Please wait a moment and try again."
         else:
-            return f"⚠️ API Error {response.status_code}: {response.text[:200]}"
+            return f"⚠️ Error {response.status_code}: {response.text[:200]}"
     except requests.exceptions.Timeout:
-        return "⚠️ Request timed out. Check your internet connection."
+        return "⚠️ Request timed out."
     except Exception as e:
         return f"⚠️ Error: {str(e)}"
 # ── Load Data ─────────────────────────────────────────────
