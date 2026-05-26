@@ -1,4 +1,3 @@
-import os
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -48,13 +47,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
  
 # ── Gemini API ────────────────────────────────────────────
+import os
+import time
+
 try:
     GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 except:
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 def ask_gemini(prompt):
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+    """Call Gemini 2.0 Flash Lite via REST API"""
+    time.sleep(2)
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent"
     try:
         payload = {
             "contents": [{"parts": [{"text": prompt}]}],
@@ -69,7 +73,8 @@ def ask_gemini(prompt):
         if response.status_code == 200:
             return response.json()["candidates"][0]["content"]["parts"][0]["text"]
         elif response.status_code == 429:
-            return "⚠️ Rate limit reached. Please wait 1 minute and try again."
+            err_detail = response.json().get("error", {}).get("message", "Unknown")
+            return f"⚠️ Rate limit reached: {err_detail}"
         elif response.status_code == 403:
             return "⚠️ API key invalid. Please check at aistudio.google.com"
         elif response.status_code == 400:
