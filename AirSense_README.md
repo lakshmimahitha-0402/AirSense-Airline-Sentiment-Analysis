@@ -2,7 +2,7 @@
 
 ## 📌 Project Overview
 
-AirSense is an AI-powered sentiment analytics dashboard that analyses Twitter customer feedback for 6 major US airlines. Instead of relying on static reports, this project combines traditional data analytics with Google Gemini 2.5 Flash generative AI to produce real-time executive summaries, airline-specific recommendations, and natural language Q&A from sentiment data.
+AirSense is an AI-powered sentiment analytics dashboard that analyses Twitter customer feedback for 6 major US airlines. Instead of relying on static reports, this project combines traditional data analytics with Meta LLaMA 3.1 via Groq generative AI to produce real-time executive summaries, airline-specific recommendations, and natural language Q&A from sentiment data.
 
 The solution combines Python-based analytics with an interactive Streamlit dashboard designed for airline executives and customer experience teams. This is an independent personal project built to demonstrate GenAI integration skills.
 
@@ -13,7 +13,7 @@ The solution combines Python-based analytics with an interactive Streamlit dashb
 - Identify which airlines have the highest and lowest customer satisfaction
 - Detect the primary complaint categories driving negative sentiment
 - Compare airline performance using sentiment scores and confidence metrics
-- Generate AI-powered actionable recommendations using Google Gemini 2.5 Flash
+- Generate AI-powered actionable recommendations using Meta LLaMA 3.1 via Groq
 - Enable natural language Q&A over airline sentiment data for non-technical users
 
 ---
@@ -55,13 +55,13 @@ Each row represents one tweet with human-annotated sentiment labels enabling gra
 
 ---
 
-## 🤖 GenAI Features — Google Gemini 2.5 Flash
+## 🤖 GenAI Features — Meta LLaMA 3.1 via Groq
 
 | Feature | Description |
 |---------|-------------|
-| **Auto Executive Summary** | Click button → Gemini generates 200-word business summary of filtered data |
-| **Per-Airline Recommendations** | Select airline → Gemini provides 3 specific improvement strategies |
-| **Custom Q&A** | Type any question → Gemini answers using dataset context |
+| **Auto Executive Summary** | Click button → Meta LLaMA 3.1 via Groq generates 200-word business summary of filtered data |
+| **Per-Airline Recommendations** | Select airline → Meta LLaMA 3.1 via Groq provides 3 specific improvement strategies |
+| **Custom Q&A** | Type any question → Meta LLaMA 3.1 via Groq answers using dataset context |
 
 ---
 
@@ -71,7 +71,7 @@ Each row represents one tweet with human-annotated sentiment labels enabling gra
 
 - **Sentiment Overview** — Pie chart, negative rate by airline, daily volume trend, hourly activity
 - **Airline Deep Dive** — Grouped bar chart, complaint heatmap, top reasons, confidence distribution
-- **GenAI Insights** — Gemini executive summary, per-airline recommendations, custom Q&A
+- **GenAI Insights** — Meta LLaMA 3.1 via Groq executive summary, per-airline recommendations, custom Q&A
 - **Tweet Explorer** — Keyword search, 500-row tweet table, CSV download
 
 ### Sidebar Filters
@@ -108,9 +108,9 @@ airsense-airline-sentiment/
 # 1. Install dependencies
 pip install -r requirements.txt
 
-# 2. Add your Gemini API key in airsense_app.py
-# Replace: GEMINI_API_KEY = "your_key_here"
-# Get free key at: https://aistudio.google.com
+# 2. Add your Meta LLaMA 3.1 via Groq key in airsense_app.py
+# Replace: GROQ_API_KEY = "your_key_here"
+# Get free key at: https://console.groq.com
 
 # 3. Run the dashboard
 streamlit run airsense_app.py
@@ -127,7 +127,7 @@ streamlit run airsense_app.py
 | matplotlib | All charts and visualizations |
 | seaborn | Heatmap visualization |
 | Streamlit | Interactive web dashboard |
-| Google Gemini 2.5 Flash | AI insights, summaries, recommendations |
+| Meta LLaMA 3.1 (Groq) | AI insights, summaries, recommendations |
 | requests | REST API calls to Gemini |
 
 ---
